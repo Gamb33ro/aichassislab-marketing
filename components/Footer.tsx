@@ -3,6 +3,7 @@ const footerCols = [
     label: 'Product',
     links: [
       { text: 'How it works', href: '#how-it-works' },
+      { text: 'Features', href: '#features' },
       { text: 'Pricing', href: '#pricing' },
       { text: 'Who it\'s for', href: '#who' },
     ],
@@ -11,8 +12,8 @@ const footerCols = [
     label: 'Company',
     links: [
       { text: 'About', href: '#contact' },
-      { text: 'Get in touch', href: '#contact' },
-      { text: 'Built by Rafael Gambero', href: '#contact' },
+      { text: 'Contact', href: '#contact' },
+      { text: 'Get a demo', href: '#contact' },
     ],
   },
   {

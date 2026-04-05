@@ -17,7 +17,7 @@ const steps = [
     number: '03',
     title: 'Launch to your audience',
     description:
-      'Your students and clients access your AI on a branded website. They pay per session or subscription. You get the revenue. Your expertise, running 24/7.',
+      'Your students and clients access your AI on a branded website. Your users access it however you choose to offer it — included in your course, as an add-on, or standalone. Your expertise, running 24/7.',
     delay: 300,
   },
 ]

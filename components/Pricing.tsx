@@ -5,14 +5,13 @@ const TIERS = [
     monthly: '$530',
     annual: '$5,300',
     featured: false,
+    users: 'Up to 50 active users',
     features: [
       'Up to 500MB content ingested',
       'Full branding and deployed website',
-      'Daily credit system for your users',
       'One revision round',
       'Email support',
     ],
-    footerNote: null,
   },
   {
     name: 'Build',
@@ -20,6 +19,7 @@ const TIERS = [
     monthly: '$1,520',
     annual: '$15,200',
     featured: true,
+    users: 'Up to 200 active users',
     features: [
       'Everything in Prototype',
       'Up to 2GB content',
@@ -30,7 +30,6 @@ const TIERS = [
       'Two revision rounds',
       'Priority support',
     ],
-    footerNote: null,
   },
   {
     name: 'Production',
@@ -38,6 +37,7 @@ const TIERS = [
     monthly: '$3,320',
     annual: '$33,200',
     featured: false,
+    users: 'Up to 500 active users',
     features: [
       'Everything in Build',
       'Unlimited content',
@@ -47,7 +47,6 @@ const TIERS = [
       'Three revision rounds',
       'Launch support',
     ],
-    footerNote: 'Price rises to $12,000 after first 3 clients.',
   },
 ]
 
@@ -61,9 +60,29 @@ export default function Pricing() {
           <span className="accent-line" />
           <h2 className="text-section-headline">Built for serious experts</h2>
           <p className="pricing-header-sub">
-            All plans include a one-time implementation fee. Annual billing saves
-            two months.
+            One-time setup fee. Monthly platform fee. You bring your own
+            Anthropic API key — your users&apos; AI costs go directly to you, not us.
           </p>
+        </div>
+
+        <div className="pricing-explainer">
+          <div className="pricing-explainer-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <div className="pricing-explainer-text">
+            <div className="pricing-explainer-headline">How AI costs work</div>
+            <div className="pricing-explainer-body">
+              Your platform runs on your own Anthropic API key. There&apos;s no markup
+              from us — you pay Anthropic directly at cost. A heavy daily user
+              typically costs{' '}
+              <span className="pricing-explainer-stat">~$0.75/day</span>, meaning
+              even an active user base is a small line item. Most clients charge
+              $25–30/month per user and keep{' '}
+              <span className="pricing-explainer-stat">&gt;90% margin</span> after API costs.
+            </div>
+          </div>
         </div>
 
         <div className="pricing-cards reveal-fade">
@@ -82,7 +101,7 @@ export default function Pricing() {
         </div>
 
         <p className="pricing-cta-text">
-          Questions about which plan fits?{' '}
+          Need more users or a custom setup?{' '}
           <a href="#contact" className="pricing-cta-link">Get in touch</a>
         </p>
 
@@ -100,9 +119,12 @@ function PricingCardContent({ tier }: { tier: typeof TIERS[number] }) {
 
       <div className="pricing-divider" />
 
-      <div className="pricing-monthly">{tier.monthly}<span style={{ fontSize: 14, fontWeight: 400, color: 'var(--text-muted)' }}>/mo</span></div>
+      <div className="pricing-monthly">
+        {tier.monthly}
+        <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--text-muted)' }}>/mo</span>
+      </div>
       <div className="pricing-monthly-note">
-        or {tier.annual} /year
+        or {tier.annual} /year &nbsp;&middot;&nbsp; {tier.users}
       </div>
 
       <ul className="pricing-features" role="list">
@@ -113,10 +135,6 @@ function PricingCardContent({ tier }: { tier: typeof TIERS[number] }) {
           </li>
         ))}
       </ul>
-
-      {tier.footerNote && (
-        <p className="pricing-footer-note">{tier.footerNote}</p>
-      )}
     </>
   )
 }

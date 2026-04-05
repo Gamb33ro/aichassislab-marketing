@@ -39,19 +39,19 @@ export default function Hero() {
               <span className="chat-card-dot" style={{ background: '#febc2e' }} />
               <span className="chat-card-dot" style={{ background: '#28c840' }} />
               <span className="chat-card-title" style={{ marginLeft: 8 }}>
-                Dr. Chen&apos;s Study AI
+                Alex Morgan&apos;s Trading AI
               </span>
             </div>
 
             <div className="chat-messages">
               <div className="chat-bubble-user">
-                How should I apply the spaced repetition principle to my exam prep?
+                How do I size a position when volatility spikes near a key level?
               </div>
               <div className="chat-bubble-ai">
-                Based on the methodology I teach in Module 3, start with 24-hour
-                intervals on new material, then expand to 3 days, 1 week, and 2
-                weeks as retention improves. For your exam timeline, that means
-                starting today on chapters 1–4.
+                From my framework: when ATR expands more than 40% above its 14-day
+                average near a key level, cut your standard size by half. Use the
+                level itself as your invalidation point and risk no more than 0.5%
+                of account per trade until volatility normalizes.
               </div>
             </div>
 

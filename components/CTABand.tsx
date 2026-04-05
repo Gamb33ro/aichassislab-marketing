@@ -1,3 +1,5 @@
+import ContactForm from './ContactForm'
+
 export default function CTABand() {
   return (
     <section id="contact" className="cta-section">
@@ -18,6 +20,7 @@ export default function CTABand() {
           <a href="#pricing" className="btn-ghost">See pricing</a>
         </div>
       </div>
+      <ContactForm />
     </section>
   )
 }
