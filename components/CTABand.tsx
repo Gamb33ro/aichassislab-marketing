@@ -12,7 +12,7 @@ export default function CTABand() {
         </p>
         <div className="cta-buttons">
           <a
-            href="mailto:hello@aichassislab.com"
+            href="mailto:aichassislab@gmail.com"
             className="btn-primary"
           >
             Get in touch

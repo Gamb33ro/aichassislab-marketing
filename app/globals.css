@@ -1199,7 +1199,80 @@ body > * { position: relative; z-index: 1; }
   font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);
+  margin-bottom: 0;
+}
+.pricing-calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 24px;
+}
+.pricing-calc-try-btn {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-family: var(--font-body), system-ui, sans-serif;
+  transition: background var(--duration-micro) var(--ease-out-expo);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pricing-calc-try-btn:hover { background: rgba(201,168,76,0.08); }
+.pricing-calc-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pricing-calc-prefix,
+.pricing-calc-suffix {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.pricing-calc-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 3px 8px;
+  width: 72px;
+  text-align: right;
+  outline: none;
+  transition: border-color var(--duration-micro) var(--ease-out-expo);
+}
+.pricing-calc-input:focus { border-color: rgba(201,168,76,0.4); }
+.pricing-calc-row-select {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.pricing-calc-select {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 5px 10px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--duration-micro) var(--ease-out-expo);
+}
+.pricing-calc-select:focus { border-color: rgba(201,168,76,0.4); }
+.pricing-calc-select option { background: var(--bg-elevated); }
+.pricing-calc-value.negative { color: rgba(239,68,68,1) !important; }
+.pricing-calc-neg-note {
+  font-size: 11px;
+  color: rgba(239,68,68,0.8);
+  margin-top: 2px;
 }
 .pricing-calc-row {
   display: flex;
