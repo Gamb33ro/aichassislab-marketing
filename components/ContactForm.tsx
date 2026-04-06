@@ -104,7 +104,6 @@ export default function ContactForm() {
             <label htmlFor="cf-plan" className="contact-label">Interested in</label>
             <select id="cf-plan" className="contact-select" value={form.plan} onChange={set('plan')}>
               <option value="">Select a plan…</option>
-              <option value="prototype">Basic — $1,800 setup</option>
               <option value="build">Pro — $5,500 setup</option>
               <option value="production">Enterprise — $7,500 setup</option>
               <option value="unsure">Not sure yet</option>

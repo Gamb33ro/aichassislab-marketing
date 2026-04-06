@@ -7,7 +7,6 @@ type FeatureValue = boolean | string
 interface Feature {
   name: string
   tooltip: string
-  prototype: FeatureValue
   build: FeatureValue
   production: FeatureValue
 }
@@ -16,70 +15,60 @@ const FEATURES: Feature[] = [
   {
     name: 'Content ingestion',
     tooltip: 'How much of your material — courses, PDFs, transcripts — the AI is trained on.',
-    prototype: '500 MB',
     build: '2 GB',
     production: 'Unlimited',
   },
   {
     name: 'Branded website',
     tooltip: 'Your AI is deployed on a fully branded website with your logo, colors, and domain.',
-    prototype: true,
     build: true,
     production: true,
   },
   {
     name: 'Custom domain',
     tooltip: 'Host on your own domain (e.g. ai.yoursite.com) instead of a chassislab subdomain.',
-    prototype: false,
     build: true,
     production: true,
   },
   {
     name: 'White-label',
     tooltip: 'Remove all AIChassisLab branding entirely. The AI appears 100% yours.',
-    prototype: false,
     build: false,
     production: true,
   },
   {
     name: 'User memory',
     tooltip: 'The AI remembers each individual user across sessions — their goals, history, and preferences.',
-    prototype: false,
     build: true,
     production: true,
   },
   {
     name: 'Analytics dashboard',
     tooltip: 'See usage stats: active users, messages per day, top questions, and engagement trends.',
-    prototype: false,
     build: true,
     production: true,
   },
   {
     name: 'Voice tuning session',
     tooltip: "A live session with our team to dial in your AI's tone, depth, and communication style.",
-    prototype: false,
     build: true,
     production: true,
   },
   {
     name: 'The Depth Suite',
     tooltip: 'Structured assessment and progress-tracking modules built specifically for your curriculum. Includes custom module development tailored to your teaching approach.',
-    prototype: false,
     build: false,
     production: true,
   },
   {
     name: 'Revision rounds',
     tooltip: 'Rounds of refinement after delivery where we adjust the AI based on your feedback.',
-    prototype: '2 rounds',
     build: '4 rounds',
     production: 'Unlimited',
   },
   {
     name: 'Support',
     tooltip: 'How we support you after launch.',
-    prototype: 'Email',
     build: 'Priority email',
     production: 'Priority + launch',
   },
@@ -142,7 +131,6 @@ export default function FeaturesTable() {
             <thead>
               <tr>
                 <th>Feature</th>
-                <th>Basic</th>
                 <th className="featured-col">Pro</th>
                 <th>Enterprise</th>
               </tr>
@@ -151,7 +139,6 @@ export default function FeaturesTable() {
               {FEATURES.map(feature => (
                 <tr key={feature.name}>
                   <td><FeatureCell feature={feature} /></td>
-                  <td><CellValue value={feature.prototype} /></td>
                   <td className="featured-col"><CellValue value={feature.build} /></td>
                   <td><CellValue value={feature.production} /></td>
                 </tr>

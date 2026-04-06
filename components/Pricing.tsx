@@ -1,25 +1,12 @@
 const TIERS = [
   {
-    name: 'Basic',
-    setup: '$1,800',
-    monthly: '$440',
-    annual: '$4,400',
-    featured: false,
-    features: [
-      'Up to 500MB content ingested',
-      'Full branding and deployed website',
-      'Two revision rounds',
-      'Email support',
-    ],
-  },
-  {
     name: 'Pro',
     setup: '$5,500',
     monthly: '$1,520',
     annual: '$15,200',
     featured: true,
     features: [
-      'Everything in Basic',
+      'Full branding and deployed website',
       'Up to 2GB content',
       'Custom domain',
       'Memory — AI remembers each user',
