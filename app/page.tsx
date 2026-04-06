@@ -5,6 +5,7 @@ import HowItWorks from '@/components/HowItWorks'
 import PricingRecommendation from '@/components/PricingRecommendation'
 import Pricing from '@/components/Pricing'
 import FeaturesTable from '@/components/FeaturesTable'
+import ShowcaseSection from '@/components/ShowcaseSection'
 import WhoItsFor from '@/components/WhoItsFor'
 import CTABand from '@/components/CTABand'
 import Footer from '@/components/Footer'
@@ -21,6 +22,7 @@ export default function Home() {
         <PricingRecommendation />
         <Pricing />
         <FeaturesTable />
+        <ShowcaseSection />
         <WhoItsFor />
         <CTABand />
       </main>
