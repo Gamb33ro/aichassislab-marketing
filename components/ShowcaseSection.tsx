@@ -26,9 +26,7 @@ export default function ShowcaseSection() {
   const [active, setActive] = useState<Tab>('shell')
 
   const features = active === 'shell' ? SHELL_FEATURES : SOPHEGO_FEATURES
-  const iframeSrc = active === 'shell'
-    ? 'https://aichassislab-shell.vercel.app/demo'
-    : 'https://egoai-public-10.vercel.app/demo'
+  const iframeSrc = active === 'shell' ? '/demo/shell' : '/demo/sophego'
   const iframeTitle = active === 'shell' ? 'testAI shell demo' : 'Sophego.AI demo'
 
   return (
