@@ -3,7 +3,7 @@ const TIERS = [
     name: 'Basic',
     setup: '$1,800',
     monthly: '$440',
-    annual: '$5,300',
+    annual: '$4,400',
     featured: false,
     features: [
       'Up to 500MB content ingested',
