@@ -142,9 +142,9 @@ export default function FeaturesTable() {
             <thead>
               <tr>
                 <th>Feature</th>
-                <th>Prototype</th>
-                <th className="featured-col">Build</th>
-                <th>Production</th>
+                <th>Basic</th>
+                <th className="featured-col">Pro</th>
+                <th>Enterprise</th>
               </tr>
             </thead>
             <tbody>

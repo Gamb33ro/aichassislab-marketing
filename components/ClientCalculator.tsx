@@ -3,9 +3,9 @@
 import { useState } from 'react'
 
 const PLANS = {
-  prototype: { label: 'Prototype (50 users)', users: 50, fee: 530 },
-  build:     { label: 'Build (200 users)',     users: 200, fee: 1520 },
-  production:{ label: 'Production (500 users)',users: 500, fee: 3320 },
+  prototype: { label: 'Basic (50 users)', users: 50, fee: 440 },
+  build:     { label: 'Pro (200 users)',   users: 200, fee: 1520 },
+  production:{ label: 'Enterprise (500 users)', users: 500, fee: 3320 },
 } as const
 
 type PlanKey = keyof typeof PLANS
@@ -98,9 +98,9 @@ export default function ClientCalculator() {
             value={plan}
             onChange={e => setPlan(e.target.value as PlanKey)}
           >
-            <option value="prototype">Prototype (50 users) — $530/mo</option>
-            <option value="build">Build (200 users) — $1,520/mo</option>
-            <option value="production">Production (500 users) — $3,320/mo</option>
+            <option value="prototype">Basic (50 users) — $440/mo</option>
+            <option value="build">Pro (200 users) — $1,520/mo</option>
+            <option value="production">Enterprise (500 users) — $3,320/mo</option>
           </select>
         ) : (
           <span className="pricing-calc-value">${fee.toLocaleString()}/mo</span>

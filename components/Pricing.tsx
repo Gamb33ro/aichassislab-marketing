@@ -1,8 +1,8 @@
 const TIERS = [
   {
-    name: 'Prototype',
+    name: 'Basic',
     setup: '$1,800',
-    monthly: '$530',
+    monthly: '$440',
     annual: '$5,300',
     featured: false,
     features: [
@@ -13,13 +13,13 @@ const TIERS = [
     ],
   },
   {
-    name: 'Build',
+    name: 'Pro',
     setup: '$5,500',
     monthly: '$1,520',
     annual: '$15,200',
     featured: true,
     features: [
-      'Everything in Prototype',
+      'Everything in Basic',
       'Up to 2GB content',
       'Custom domain',
       'Memory — AI remembers each user',
@@ -30,13 +30,13 @@ const TIERS = [
     ],
   },
   {
-    name: 'Production',
+    name: 'Enterprise',
     setup: '$7,500',
     monthly: '$3,320',
     annual: '$33,200',
     featured: false,
     features: [
-      'Everything in Build',
+      'Everything in Pro',
       'Unlimited content',
       'Full white-label — no AIChassisLab branding',
       'The Depth Suite — structured assessment modules',
