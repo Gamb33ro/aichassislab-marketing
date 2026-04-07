@@ -458,7 +458,7 @@ export default function SophegoDemoPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [thinkingPhrase, setThinkingPhrase] = useState(THINKING_PHRASES[0])
 
-  const messagesEndRef = useRef(null)
+  const messagesWrapRef = useRef(null)
   const textareaRef = useRef(null)
   const thinkingIntervalRef = useRef(null)
 
@@ -471,7 +471,8 @@ export default function SophegoDemoPage() {
   }, [color, theme])
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    const el = messagesWrapRef.current
+    if (el) el.scrollTop = el.scrollHeight
   }, [messages, isLoading])
 
   useEffect(() => {
@@ -510,7 +511,7 @@ export default function SophegoDemoPage() {
     await new Promise(r => setTimeout(r, 1200))
     setMessages(prev => [...prev, { role: 'assistant', content: DEMO_RESPONSE }])
     setIsLoading(false)
-    textareaRef.current?.focus()
+    textareaRef.current?.focus({ preventScroll: true })
   }, [input, isLoading])
 
   function navigate(view) {
@@ -574,7 +575,7 @@ export default function SophegoDemoPage() {
 
     return (
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }}>
-        <div className="messages-wrap">
+        <div className="messages-wrap" ref={messagesWrapRef}>
           <div className="messages-inner">
             {messages.length === 0 && (
               <div className="chat-welcome">
@@ -611,7 +612,6 @@ export default function SophegoDemoPage() {
                 </div>
               </div>
             )}
-            <div ref={messagesEndRef} />
           </div>
         </div>
         <div className="input-area">

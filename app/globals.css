@@ -926,6 +926,15 @@ body > * { position: relative; z-index: 1; }
   line-height: 1.7;
   margin: 0 0 20px;
 }
+.who-proof-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(201,168,76,0.5);
+}
+.who-proof-link:hover {
+  text-decoration-color: var(--accent);
+}
 .who-path-proof {
   font-size: 13.5px;
   font-weight: 400;

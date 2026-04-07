@@ -79,7 +79,7 @@ export default function ShellDemoPage() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const bottomRef = useRef<HTMLDivElement>(null)
+  const messagesWrapRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
@@ -87,7 +87,8 @@ export default function ShellDemoPage() {
   }, [color])
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    const el = messagesWrapRef.current
+    if (el) el.scrollTop = el.scrollHeight
   }, [messages, isLoading])
 
   useEffect(() => {
@@ -106,7 +107,7 @@ export default function ShellDemoPage() {
     await new Promise(r => setTimeout(r, 900))
     setMessages(prev => [...prev, { role: 'assistant', content: DEMO_RESPONSE }])
     setIsLoading(false)
-    textareaRef.current?.focus()
+    textareaRef.current?.focus({ preventScroll: true })
   }, [input, isLoading])
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -272,7 +273,7 @@ export default function ShellDemoPage() {
 
         {view === 'chat' && (
           <div className="chat-wrap">
-            <div className="messages-wrap">
+            <div className="messages-wrap" ref={messagesWrapRef}>
               <div className="messages-inner">
                 {messages.length === 0 && (
                   <div className="chat-welcome">
@@ -297,7 +298,6 @@ export default function ShellDemoPage() {
                     </div>
                   </div>
                 )}
-                <div ref={bottomRef} />
               </div>
             </div>
             <div className="input-area">

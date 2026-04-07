@@ -2,7 +2,7 @@ import ClientCalculator from './ClientCalculator'
 
 export default function PricingRecommendation() {
   return (
-    <section className="pricing-rec-section">
+    <section id="calculator" className="pricing-rec-section">
       <div className="pricing-rec-inner">
 
         <div className="pricing-rec-header reveal">
