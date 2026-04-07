@@ -3,31 +3,35 @@
 import { useState } from 'react'
 
 const SHELL_FEATURES = [
-  { icon: '◈', label: 'Branded interface', desc: 'Your logo, name, and colors.' },
-  { icon: '◧', label: 'Dashboard + notes', desc: 'Stats, streaks, and a notes board per user.' },
-  { icon: '◎', label: 'Conversation history', desc: 'Every session saved in the sidebar.' },
-  { icon: '◯', label: 'Credit limits', desc: 'Daily caps so your costs stay predictable.' },
-  { icon: '◐', label: 'Three color modes', desc: 'Dark, grey, and light — user choice.' },
-  { icon: '◻', label: 'Revenue stays yours', desc: 'Flat license fee. No rev-share, no cuts. What you earn, you keep.' },
+  { label: 'Branded interface',    desc: 'Your logo, name, and colors.' },
+  { label: 'Dashboard + notes',    desc: 'Stats, streaks, and a notes board per user.' },
+  { label: 'Conversation history', desc: 'Every session saved in the sidebar.' },
+  { label: 'Credit limits',        desc: 'Daily caps so your costs stay predictable.' },
+  { label: 'Three color modes',    desc: 'Dark, grey, and light — user choice.' },
+  { label: 'Revenue stays yours',  desc: 'Flat license fee. No rev-share, no cuts.' },
 ]
 
 const SOPHEGO_FEATURES = [
-  { icon: '◈', label: '6 AI modes', desc: 'Jung, Steiner, Swedenborg, Aquinas, Socratic, Synthesis.' },
-  { icon: '◎', label: 'Archetype Analyst', desc: '30-question depth psychology assessment.' },
-  { icon: '◯', label: 'Ego Mapper', desc: '7 structured modules — Practice, Shadow Journal, Mirror, and more.' },
-  { icon: '◧', label: 'Memory system', desc: 'AI remembers each user across sessions.' },
-  { icon: '◐', label: 'Friend / Formal modes', desc: 'Two registers, three color schemes.' },
-  { icon: '◻', label: 'File attachment', desc: 'PDFs and images in the conversation.' },
+  { label: '6 AI modes',         desc: 'Jung, Steiner, Swedenborg, Aquinas, Socratic, Synthesis.' },
+  { label: 'Archetype Analyst',  desc: '30-question depth psychology assessment.' },
+  { label: 'Ego Mapper',         desc: '7 structured modules — Practice, Shadow Journal, Mirror, and more.' },
+  { label: 'Memory system',      desc: 'AI remembers each user across sessions.' },
+  { label: 'Friend / Formal',    desc: 'Two registers, three color schemes.' },
+  { label: 'File attachment',    desc: 'PDFs and images in the conversation.' },
 ]
+
+const CHROME_LABELS: Record<string, string> = {
+  shell:   'testAI — The Shell',
+  sophego: 'Sophego.AI — A Fully Realized Product',
+}
 
 type Tab = 'shell' | 'sophego'
 
 export default function ShowcaseSection() {
   const [active, setActive] = useState<Tab>('shell')
 
-  const features = active === 'shell' ? SHELL_FEATURES : SOPHEGO_FEATURES
-  const iframeSrc = active === 'shell' ? '/demo/shell' : '/demo/sophego'
-  const iframeTitle = active === 'shell' ? 'testAI shell demo' : 'Sophego.AI demo'
+  const features  = active === 'shell' ? SHELL_FEATURES : SOPHEGO_FEATURES
+  const iframeSrc = active === 'shell' ? '/demo/shell'  : '/demo/sophego'
 
   return (
     <section id="showcase" className="showcase-section">
@@ -61,11 +65,11 @@ export default function ShowcaseSection() {
           </button>
         </div>
 
-        {/* Features grid */}
+        {/* Feature strip — 2-col editorial list, no generic icon grid */}
         <div className="showcase-features-grid">
           {features.map(f => (
             <div key={f.label} className="showcase-feat">
-              <span className="showcase-feat-icon">{f.icon}</span>
+              <div className="showcase-feat-bar" aria-hidden="true" />
               <div>
                 <div className="showcase-feat-name">{f.label}</div>
                 <div className="showcase-feat-desc">{f.desc}</div>
@@ -74,13 +78,23 @@ export default function ShowcaseSection() {
           ))}
         </div>
 
-        {/* Full-width iframe */}
+        {/* Framed product demo */}
         <div className="showcase-frame-wrap">
+          {/* Browser chrome bar */}
+          <div className="sf-chrome">
+            <div className="sf-chrome-dots">
+              <span className="sf-dot" style={{ background: '#ff5f57' }} />
+              <span className="sf-dot" style={{ background: '#febc2e' }} />
+              <span className="sf-dot" style={{ background: '#28c840' }} />
+            </div>
+            <div className="sf-chrome-title">{CHROME_LABELS[active]}</div>
+            <div className="sf-chrome-spacer" />
+          </div>
           <iframe
             key={active}
             src={iframeSrc}
             className="showcase-frame"
-            title={iframeTitle}
+            title={CHROME_LABELS[active]}
           />
         </div>
 
