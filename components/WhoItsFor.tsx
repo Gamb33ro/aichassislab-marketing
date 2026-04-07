@@ -1,18 +1,18 @@
 const PATHS = [
   {
+    tag: 'Revenue Generation Play',
+    headline: '90 users covers\nthe platform fee.',
+    body: "You are not asking for a large user base — you are asking for a small slice of the audience you already have. A creator with 500 students needs 18% adoption at $25/month to break even. A creator with 1,000 students needs 9%. Gate your AI behind a premium tier, sell it as a paid add-on, or bundle it into a higher membership level. Every subscriber above 90 is pure margin, running without you touching it.",
+    proof: <>90 users at $25/month covers the platform fee entirely — after API costs. Everything above that is ~$17 per user, per month, straight to you. Model your numbers with the <a href="#calculator" className="who-proof-link">calculator</a>.</>,
+    works: ['Premium tier upgrades', 'Paid add-ons to existing courses', 'Post-course subscriptions', 'Membership tier expansions'],
+    delay: 0,
+  },
+  {
     tag: 'Cost Reduction Play',
     headline: 'Stop paying\nfor repetitive questions.',
     body: "Give every student AI access as part of the course experience. No new revenue line — but you stop paying a VA, stop spending hours on support, and stop being the bottleneck. An AI trained on your content answers exactly as you would, at 2am on a Sunday, without touching your calendar.",
     proof: "The math is operational: one VA costs $2,500–4,000 a month. The platform fee is a fraction of that — and the AI never calls in sick.",
     works: ['Online courses', 'Cohort programs', 'Membership communities', 'Training programs'],
-    delay: 0,
-  },
-  {
-    tag: 'Revenue Generation Play',
-    headline: 'Add a revenue line\nwithout adding headcount.',
-    body: "Gate your AI behind a premium tier, sell access as a paid add-on, or bundle it into a higher-priced membership. Your expertise becomes a profit center. Students in a one-time course can subscribe for continued access after it ends. Cohort buyers can upgrade to the AI tier. Community members can unlock it at the next level.",
-    proof: <>200 users at $25/month. After the platform fee and typical API costs, that&apos;s $22,000–$36,000 in net annual revenue — from content you already created. Model your exact numbers with the <a href="#calculator" className="who-proof-link">calculator</a>.</>,
-    works: ['Premium tier upgrades', 'Paid add-ons to existing courses', 'Post-course subscriptions', 'Membership tier expansions'],
     delay: 80,
   },
 ]
