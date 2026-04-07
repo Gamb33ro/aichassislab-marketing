@@ -5,6 +5,7 @@ import HowItWorks from '@/components/HowItWorks'
 import PricingRecommendation from '@/components/PricingRecommendation'
 import Pricing from '@/components/Pricing'
 import FeaturesTable from '@/components/FeaturesTable'
+import DepthSuite from '@/components/DepthSuite'
 import ShowcaseSection from '@/components/ShowcaseSection'
 import WhoItsFor from '@/components/WhoItsFor'
 import CTABand from '@/components/CTABand'
@@ -22,6 +23,7 @@ export default function Home() {
         <PricingRecommendation />
         <Pricing />
         <FeaturesTable />
+        <DepthSuite />
         <ShowcaseSection />
         <WhoItsFor />
         <CTABand />
