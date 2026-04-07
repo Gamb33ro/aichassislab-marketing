@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 const SHELL_FEATURES = [
   { label: 'Branded interface',    desc: 'Your logo, name, and colors.' },
@@ -29,9 +29,37 @@ type Tab = 'shell' | 'sophego'
 
 export default function ShowcaseSection() {
   const [active, setActive] = useState<Tab>('shell')
+  const [fullscreen, setFullscreen] = useState(false)
 
   const features  = active === 'shell' ? SHELL_FEATURES : SOPHEGO_FEATURES
   const iframeSrc = active === 'shell' ? '/demo/shell'  : '/demo/sophego'
+
+  const exitFullscreen = useCallback(() => setFullscreen(false), [])
+
+  useEffect(() => {
+    if (!fullscreen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') exitFullscreen() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [fullscreen, exitFullscreen])
+
+  const chromeDots = (fsMode: boolean) => (
+    <div className="sf-chrome-dots">
+      <span
+        className="sf-dot"
+        style={{ background: '#ff5f57', cursor: fsMode ? 'pointer' : 'default' }}
+        onClick={fsMode ? exitFullscreen : undefined}
+        title={fsMode ? 'Exit fullscreen' : undefined}
+      />
+      <span className="sf-dot" style={{ background: '#febc2e' }} />
+      <span
+        className="sf-dot"
+        style={{ background: '#28c840', cursor: !fsMode ? 'pointer' : 'default' }}
+        onClick={!fsMode ? () => setFullscreen(true) : undefined}
+        title={!fsMode ? 'Fullscreen' : undefined}
+      />
+    </div>
+  )
 
   return (
     <section id="showcase" className="showcase-section">
@@ -80,13 +108,8 @@ export default function ShowcaseSection() {
 
         {/* Framed product demo */}
         <div className="showcase-frame-wrap">
-          {/* Browser chrome bar */}
           <div className="sf-chrome">
-            <div className="sf-chrome-dots">
-              <span className="sf-dot" style={{ background: '#ff5f57' }} />
-              <span className="sf-dot" style={{ background: '#febc2e' }} />
-              <span className="sf-dot" style={{ background: '#28c840' }} />
-            </div>
+            {chromeDots(false)}
             <div className="sf-chrome-title">{CHROME_LABELS[active]}</div>
             <div className="sf-chrome-spacer" />
           </div>
@@ -97,6 +120,25 @@ export default function ShowcaseSection() {
             title={CHROME_LABELS[active]}
           />
         </div>
+
+        {/* Fullscreen overlay */}
+        {fullscreen && (
+          <div className="sf-fullscreen-overlay" onClick={exitFullscreen}>
+            <div className="sf-fullscreen-window" onClick={e => e.stopPropagation()}>
+              <div className="sf-chrome">
+                {chromeDots(true)}
+                <div className="sf-chrome-title">{CHROME_LABELS[active]}</div>
+                <div className="sf-chrome-spacer" />
+              </div>
+              <iframe
+                key={`fs-${active}`}
+                src={iframeSrc}
+                className="sf-fullscreen-frame"
+                title={CHROME_LABELS[active]}
+              />
+            </div>
+          </div>
+        )}
 
         <p className="showcase-cta-text">
           Ready to build yours?{' '}

@@ -244,8 +244,6 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 
 /* ─── Mobile optimisation (iframe viewport ≤ 600px) ─── */
 @media (max-width: 600px) {
-  /* Hide sidebar entirely on small viewports */
-  .sidebar { width: 0 !important; border-right: none !important; overflow: hidden; }
   /* Tighten content padding */
   .chat-content { padding: 14px 12px 10px; }
   .content-wrap { padding: 20px 14px; }

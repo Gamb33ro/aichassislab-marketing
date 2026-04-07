@@ -73,7 +73,9 @@ function timeAgo(dateStr: string): string {
 export default function ShellDemoPage() {
   const [color, setColor] = useState<ColorMode>('dark')
   const [view, setView] = useState<View>('chat')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth >= 600 : true
+  )
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
   const [activeConvId, setActiveConvId] = useState<string | null>('1')
   const [input, setInput] = useState('')

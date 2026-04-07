@@ -451,7 +451,9 @@ export default function SophegoDemoPage() {
   const [theme, setTheme] = useState('friend')
   const [currentMode, setCurrentMode] = useState('EGO.AI')
   const [currentView, setCurrentView] = useState('chat')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth >= 600 : true
+  )
   const [showDropdown, setShowDropdown] = useState(false)
   const [messages, setMessages] = useState(INITIAL_MESSAGES)
   const [input, setInput] = useState('')

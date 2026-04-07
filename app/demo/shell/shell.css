@@ -164,15 +164,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-sans, 
 
 /* ─── Mobile optimisation (iframe viewport ≤ 600px) ─── */
 @media (max-width: 600px) {
-  /* Force sidebar to icon-strip (same as .collapsed state) */
-  .sidebar { width: 52px !important; }
-  .sidebar-logo-name,
-  .btn-label,
-  .nav-label,
-  .history-section-label,
-  .history-item,
-  .color-row,
-  .profile-name { opacity: 0; width: 0; overflow: hidden; pointer-events: none; }
   /* Tighten main layout */
   .messages-inner { padding: 16px 12px; }
   .input-wrap { padding: 8px; }
