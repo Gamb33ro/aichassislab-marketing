@@ -241,3 +241,17 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 .module-tradition-count { font-size: 11px; color: var(--text-dimmer); font-family: var(--font-sidebar); letter-spacing: 0.08em; }
 .module-mirror-warning { background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius-card); padding: 16px 20px; font-size: 13px; color: var(--text-dim); line-height: 1.7; margin: 0 0 16px; }
 .mirror-memory-note { font-size: 12px; color: var(--text-dim); font-style: italic; line-height: 1.6; margin-bottom: 16px; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-input); background: var(--bg-hover); }
+
+/* ─── Mobile optimisation (iframe viewport ≤ 600px) ─── */
+@media (max-width: 600px) {
+  /* Hide sidebar entirely on small viewports */
+  .sidebar { width: 0 !important; border-right: none !important; overflow: hidden; }
+  /* Tighten content padding */
+  .chat-content { padding: 14px 12px 10px; }
+  .content-wrap { padding: 20px 14px; }
+  .messages-inner { padding: 14px 12px; }
+  .input-wrap { padding: 8px 12px 10px; }
+  .header { padding: 0 12px; }
+  .page-content { padding: 20px 14px 40px; }
+  .chat-bubble { max-width: 92%; }
+}

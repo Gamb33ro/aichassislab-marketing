@@ -266,11 +266,12 @@ export default function DepthSuite() {
             powered by the best available AI — designed to help students actually exercise
             what they learned, not just review it.
           </p>
-          <p className="ds-examples-note">
-            The modules below are examples of what this looks like across three domains.
-            Yours is built around what you teach.
-          </p>
         </div>
+
+        <p className="ds-examples-note">
+          The modules below are examples of what this looks like across three domains.
+          Yours is built around what you teach.
+        </p>
 
         <div className="ds-widgets">
           {MODULES.map(mod => (

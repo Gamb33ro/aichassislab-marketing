@@ -161,3 +161,20 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-sans, 
 .note-empty-text { font-size: 11.5px; color: var(--text-faint); }
 .note-add-btn { font-size: 11.5px; color: var(--text-faint); background: none; border: none; cursor: pointer; padding: 3px 0; text-align: left; transition: color 0.15s; font-family: inherit; display: flex; align-items: center; gap: 4px; }
 .note-add-btn:hover { color: var(--text-muted); }
+
+/* ─── Mobile optimisation (iframe viewport ≤ 600px) ─── */
+@media (max-width: 600px) {
+  /* Force sidebar to icon-strip (same as .collapsed state) */
+  .sidebar { width: 52px !important; }
+  .sidebar-logo-name,
+  .btn-label,
+  .nav-label,
+  .history-section-label,
+  .history-item,
+  .color-row,
+  .profile-name { opacity: 0; width: 0; overflow: hidden; pointer-events: none; }
+  /* Tighten main layout */
+  .messages-inner { padding: 16px 12px; }
+  .input-wrap { padding: 8px; }
+  .dashboard-wrap { padding: 20px 14px 32px; }
+}
