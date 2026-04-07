@@ -1,27 +1,19 @@
-const entries = [
+const PATHS = [
   {
-    type: 'Course Creators',
-    description:
-      "You've built a curriculum your students need to apply in real time. Stop answering the same questions in DMs at midnight.",
+    tag: 'Cost Reduction Play',
+    headline: 'Stop paying\nfor repetitive questions.',
+    body: "Give every student AI access as part of the course experience. No new revenue line — but you stop paying a VA, stop spending hours on support, and stop being the bottleneck. An AI trained on your content answers exactly as you would, at 2am on a Sunday, without touching your calendar.",
+    proof: "The math is operational: one VA costs $2,500–4,000 a month. The platform fee is a fraction of that — and the AI never calls in sick.",
+    works: ['Online courses', 'Cohort programs', 'Membership communities', 'Training programs'],
     delay: 0,
   },
   {
-    type: 'Coaches and Consultants',
-    description:
-      "Your framework is proprietary. Your AI should know it. Give clients access to your thinking between sessions.",
+    tag: 'Revenue Generation Play',
+    headline: 'Add a revenue line\nwithout adding headcount.',
+    body: "Gate your AI behind a premium tier, sell access as a paid add-on, or bundle it into a higher-priced membership. Your expertise becomes a profit center. Students in a one-time course can subscribe for continued access after it ends. Cohort buyers can upgrade to the AI tier. Community members can unlock it at the next level.",
+    proof: "The math is entrepreneurial: 200 users at $25/month is $5,000 in new monthly revenue on top of your existing business — from content you already created.",
+    works: ['Premium tier upgrades', 'Paid add-ons to existing courses', 'Post-course subscriptions', 'Membership tier expansions'],
     delay: 80,
-  },
-  {
-    type: 'Educators and Professors',
-    description:
-      "Your expertise belongs to you, not a generic chatbot. An AI trained on your research and teaching materials is a different product entirely.",
-    delay: 160,
-  },
-  {
-    type: 'Businesses with Training Programs',
-    description:
-      "Internal knowledge transfer is broken. An AI trained on your documentation, SOPs, and institutional knowledge is always available to your team.",
-    delay: 240,
   },
 ]
 
@@ -33,23 +25,35 @@ export default function WhoItsFor() {
         <div className="who-header">
           <span className="text-accent-label">Who it&apos;s for</span>
           <span className="accent-line-left" />
-          <h2 className="text-section-headline" style={{ maxWidth: 520 }}>
-            Built for experts with depth to teach
+          <h2 className="text-section-headline" style={{ maxWidth: 560 }}>
+            Two reasons experts build an AI
           </h2>
+          <p className="who-header-sub">
+            Every creator using AIChassisLab is doing one of two things — or both.
+          </p>
         </div>
 
-        <div className="who-entries">
-          {entries.map(entry => (
+        <div className="who-paths">
+          {PATHS.map(path => (
             <div
-              key={entry.type}
-              className="who-entry reveal"
-              style={{ animationDelay: `${entry.delay}ms` } as React.CSSProperties}
+              key={path.tag}
+              className="who-path reveal"
+              style={{ animationDelay: `${path.delay}ms` } as React.CSSProperties}
             >
-              <div className="who-accent-bar" aria-hidden="true" />
-              <div>
-                <div className="who-type">{entry.type}</div>
-                <p className="who-desc">{entry.description}</p>
-              </div>
+              <div className="who-path-tag">{path.tag}</div>
+              <h3 className="who-path-headline">
+                {path.headline.split('\n').map((line, i) => (
+                  <span key={i} style={{ display: 'block' }}>{line}</span>
+                ))}
+              </h3>
+              <p className="who-path-body">{path.body}</p>
+              <p className="who-path-proof">{path.proof}</p>
+              <div className="who-path-works-label">Works for</div>
+              <ul className="who-path-works" role="list">
+                {path.works.map(w => (
+                  <li key={w} className="who-path-works-item">{w}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

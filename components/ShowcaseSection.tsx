@@ -8,7 +8,7 @@ const SHELL_FEATURES = [
   { icon: '◎', label: 'Conversation history', desc: 'Every session saved in the sidebar.' },
   { icon: '◯', label: 'Credit limits', desc: 'Daily caps so your costs stay predictable.' },
   { icon: '◐', label: 'Three color modes', desc: 'Dark, grey, and light — user choice.' },
-  { icon: '◻', label: 'Your API key', desc: "AI costs go straight to you, not us." },
+  { icon: '◻', label: 'Revenue stays yours', desc: 'Flat license fee. No rev-share, no cuts. What you earn, you keep.' },
 ]
 
 const SOPHEGO_FEATURES = [

@@ -43,10 +43,10 @@ export default function Pricing() {
           <span className="accent-line" />
           <h2 className="text-section-headline">Built for serious experts</h2>
           <p className="pricing-header-sub">
-            One-time setup fee. Monthly platform fee. You bring your own
-            Anthropic API key — your users&apos; AI costs go directly to you, not us.
-            A heavy daily user typically costs $0.40–0.65/day. Most clients keep
-            over 90% margin.
+            One-time setup. Flat monthly platform fee — fixed regardless of
+            how many users you have. You set what you charge your audience and
+            keep 100% of it. We charge a flat license, not a percentage of your
+            revenue. Your margin scales with your user base. Ours does not.
           </p>
         </div>
 
