@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { createPortal } from 'react-dom'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 const SHELL_FEATURES = [
   { label: 'Branded interface',    desc: 'Your logo, name, and colors.' },
@@ -29,30 +28,35 @@ const CHROME_LABELS: Record<string, string> = {
 type Tab = 'shell' | 'sophego'
 
 export default function ShowcaseSection() {
-  const [active, setActive] = useState<Tab>('shell')
-  const [fullscreen, setFullscreen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => { setMounted(true) }, [])
+  const [active, setActive]       = useState<Tab>('shell')
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
 
   const features  = active === 'shell' ? SHELL_FEATURES : SOPHEGO_FEATURES
   const iframeSrc = active === 'shell' ? '/demo/shell'  : '/demo/sophego'
 
-  const openFullscreen  = useCallback(() => setFullscreen(true), [])
-  const closeFullscreen = useCallback(() => setFullscreen(false), [])
-
-  // Lock body scroll and handle Escape when fullscreen
+  // Sync state with native fullscreen changes (Esc key, browser button, etc.)
   useEffect(() => {
-    if (!fullscreen) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeFullscreen() }
-    window.addEventListener('keydown', onKey)
+    const onChange = () => setIsFullscreen(!!document.fullscreenElement)
+    document.addEventListener('fullscreenchange', onChange)
+    document.addEventListener('webkitfullscreenchange', onChange)
     return () => {
-      document.body.style.overflow = prev
-      window.removeEventListener('keydown', onKey)
+      document.removeEventListener('fullscreenchange', onChange)
+      document.removeEventListener('webkitfullscreenchange', onChange)
     }
-  }, [fullscreen, closeFullscreen])
+  }, [])
+
+  const openFullscreen = useCallback(() => {
+    const el = wrapRef.current
+    if (!el) return
+    if (el.requestFullscreen)             el.requestFullscreen()
+    else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen()
+  }, [])
+
+  const closeFullscreen = useCallback(() => {
+    if (document.exitFullscreen)             document.exitFullscreen()
+    else if ((document as any).webkitExitFullscreen) (document as any).webkitExitFullscreen()
+  }, [])
 
   return (
     <section id="showcase" className="showcase-section">
@@ -99,33 +103,61 @@ export default function ShowcaseSection() {
           ))}
         </div>
 
-        {/* Framed product demo */}
-        <div className="showcase-frame-wrap">
+        {/* Framed product demo — this element is the fullscreen target */}
+        <div className="showcase-frame-wrap" ref={wrapRef}>
           <div className="sf-chrome">
+            {/* macOS dots */}
             <div className="sf-chrome-dots">
-              <span className="sf-dot" style={{ background: '#ff5f57' }} />
-              <span className="sf-dot" style={{ background: '#febc2e' }} />
-              <span
-                className="sf-dot sf-dot-expand"
-                style={{ background: '#28c840', cursor: 'pointer' }}
-                onClick={openFullscreen}
-                aria-label="Expand to fullscreen"
-              />
+              {isFullscreen
+                ? <>
+                    <span
+                      className="sf-dot"
+                      style={{ background: '#ff5f57', cursor: 'pointer' }}
+                      onClick={closeFullscreen}
+                      title="Exit fullscreen"
+                    />
+                    <span className="sf-dot" style={{ background: '#febc2e' }} />
+                    <span className="sf-dot" style={{ background: '#28c840' }} />
+                  </>
+                : <>
+                    <span className="sf-dot" style={{ background: '#ff5f57' }} />
+                    <span className="sf-dot" style={{ background: '#febc2e' }} />
+                    <span
+                      className="sf-dot sf-dot-expand"
+                      style={{ background: '#28c840', cursor: 'pointer' }}
+                      onClick={openFullscreen}
+                      title="Fullscreen"
+                    />
+                  </>
+              }
             </div>
+
             <div className="sf-chrome-title">{CHROME_LABELS[active]}</div>
-            <button className="sf-expand-btn" onClick={openFullscreen} aria-label="Expand demo">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M7.5 1.5H10.5V4.5M4.5 10.5H1.5V7.5M10.5 1.5L6.5 5.5M1.5 10.5L5.5 6.5"
-                  stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Expand</span>
-            </button>
+
+            {/* Action button — right side */}
+            {isFullscreen
+              ? <button className="sf-close-btn" onClick={closeFullscreen}>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                  Close
+                </button>
+              : <button className="sf-expand-btn" onClick={openFullscreen}>
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                    <path d="M7 1h3v3M4 10H1V7M10 1L6 5M1 10l4-4"
+                      stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  Expand
+                </button>
+            }
           </div>
+
           <iframe
             key={active}
             src={iframeSrc}
             className="showcase-frame"
             title={CHROME_LABELS[active]}
+            allowFullScreen
           />
         </div>
 
@@ -135,40 +167,6 @@ export default function ShowcaseSection() {
         </p>
 
       </div>
-
-      {/* Fullscreen portal — rendered to document.body to escape stacking contexts */}
-      {mounted && fullscreen && createPortal(
-        <div className="sf-fullscreen-overlay" onClick={closeFullscreen}>
-          <div className="sf-fullscreen-window" onClick={e => e.stopPropagation()}>
-            <div className="sf-chrome">
-              <div className="sf-chrome-dots">
-                <span
-                  className="sf-dot"
-                  style={{ background: '#ff5f57', cursor: 'pointer' }}
-                  onClick={closeFullscreen}
-                  aria-label="Close fullscreen"
-                />
-                <span className="sf-dot" style={{ background: '#febc2e' }} />
-                <span className="sf-dot" style={{ background: '#28c840' }} />
-              </div>
-              <div className="sf-chrome-title">{CHROME_LABELS[active]}</div>
-              <button className="sf-close-btn" onClick={closeFullscreen} aria-label="Close fullscreen">
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-                  <path d="M1 1L10 10M10 1L1 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-                <span>Close</span>
-              </button>
-            </div>
-            <iframe
-              key={`fs-${active}`}
-              src={iframeSrc}
-              className="sf-fullscreen-frame"
-              title={CHROME_LABELS[active]}
-            />
-          </div>
-        </div>,
-        document.body
-      )}
     </section>
   )
 }
