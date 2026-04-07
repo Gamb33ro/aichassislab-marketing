@@ -12,10 +12,15 @@ interface FormState {
 
 const INITIAL: FormState = { name: '', email: '', company: '', plan: '', message: '' }
 
+const PLAN_LABELS: Record<string, string> = {
+  build: 'Pro — $5,500 setup',
+  production: 'Enterprise — $7,500 setup',
+  unsure: 'Not sure yet',
+}
+
 export default function ContactForm() {
   const [form, setForm] = useState<FormState>(INITIAL)
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sent'>('idle')
 
   function set(field: keyof FormState) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -23,35 +28,37 @@ export default function ContactForm() {
     }
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setStatus('loading')
-    setErrorMsg('')
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        throw new Error(data.error || 'Something went wrong.')
-      }
-      setStatus('success')
-    } catch (err) {
-      setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong.')
-    }
+
+    const plan = PLAN_LABELS[form.plan] || form.plan
+    const body = [
+      form.message,
+      '',
+      '---',
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      form.company ? `Company: ${form.company}` : null,
+      plan ? `Interested in: ${plan}` : null,
+    ]
+      .filter(line => line !== null)
+      .join('\n')
+
+    const subject = encodeURIComponent(`Inquiry from ${form.name}`)
+    const encodedBody = encodeURIComponent(body)
+
+    window.location.href = `mailto:hello@aichassislab.com?subject=${subject}&body=${encodedBody}`
+    setStatus('sent')
   }
 
-  if (status === 'success') {
+  if (status === 'sent') {
     return (
       <div className="contact-form-wrap">
         <div className="contact-success">
           <div className="contact-success-icon">✓</div>
-          <div className="contact-success-title">Message received</div>
+          <div className="contact-success-title">Opening your email client</div>
           <p className="contact-success-sub">
-            We&apos;ll get back to you within one business day.
+            Your message is pre-filled and ready to send.
           </p>
         </div>
       </div>
@@ -123,18 +130,13 @@ export default function ContactForm() {
           />
         </div>
 
-        {status === 'error' && (
-          <div className="contact-error">{errorMsg}</div>
-        )}
-
         <div className="contact-submit">
           <button
             type="submit"
             className="btn-primary"
-            disabled={status === 'loading'}
             style={{ width: '100%', justifyContent: 'center' }}
           >
-            {status === 'loading' ? 'Sending…' : 'Send message'}
+            Send message
           </button>
         </div>
       </form>
