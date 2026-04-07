@@ -11,7 +11,7 @@ const PATHS = [
     tag: 'Revenue Generation Play',
     headline: 'Add a revenue line\nwithout adding headcount.',
     body: "Gate your AI behind a premium tier, sell access as a paid add-on, or bundle it into a higher-priced membership. Your expertise becomes a profit center. Students in a one-time course can subscribe for continued access after it ends. Cohort buyers can upgrade to the AI tier. Community members can unlock it at the next level.",
-    proof: "The math: 200 users at $25/month is $5,000 in gross revenue. Subtract the $1,520 platform fee and you net ~$3,480 every month — from content you already created.",
+    proof: "200 users at $25/month is $5,000 gross. After the $1,520 platform fee and typical API costs, net margin lands around $1,900–$3,000/month depending on usage — from content you already created. Model your exact numbers with the calculator below.",
     works: ['Premium tier upgrades', 'Paid add-ons to existing courses', 'Post-course subscriptions', 'Membership tier expansions'],
     delay: 80,
   },
