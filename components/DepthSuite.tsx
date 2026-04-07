@@ -133,31 +133,6 @@ const mirrorSvg = (
       fill="rgba(255,255,255,0.065)" transform="rotate(-22 67 52)" />
     <ellipse cx="59" cy="57" rx="4"  ry="14"
       fill="rgba(255,255,255,0.04)"  transform="rotate(-22 59 57)" />
-
-    {/* Face reflection — subtle, drawn entirely with strokes */}
-    {/* Face outline (dashed) */}
-    <ellipse cx="100" cy="96" rx="25" ry="31"
-      fill="none" stroke="rgba(201,168,76,0.16)" strokeWidth="0.8" strokeDasharray="4 3" />
-    {/* Left eye */}
-    <ellipse cx="89" cy="86" rx="4.5" ry="5.5"
-      fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.28)" strokeWidth="0.9" />
-    <circle cx="89" cy="86" r="2" fill="rgba(201,168,76,0.45)" />
-    {/* Right eye */}
-    <ellipse cx="111" cy="86" rx="4.5" ry="5.5"
-      fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.28)" strokeWidth="0.9" />
-    <circle cx="111" cy="86" r="2" fill="rgba(201,168,76,0.45)" />
-    {/* Nose */}
-    <path d="M 96 97 Q 100 104 104 97"
-      fill="none" stroke="rgba(201,168,76,0.15)" strokeWidth="0.9" strokeLinecap="round" />
-    {/* Upper lip */}
-    <path d="M 90 110 Q 100 106 110 110"
-      fill="none" stroke="rgba(201,168,76,0.17)" strokeWidth="0.9" strokeLinecap="round" />
-    {/* Lower lip */}
-    <path d="M 90 110 Q 100 117 110 110"
-      fill="none" stroke="rgba(201,168,76,0.2)"  strokeWidth="1"   strokeLinecap="round" />
-    {/* Chin hint */}
-    <path d="M 93 124 Q 100 128 107 124"
-      fill="none" stroke="rgba(201,168,76,0.10)" strokeWidth="0.8" strokeLinecap="round" />
   </svg>
 )
 
@@ -252,19 +227,19 @@ const scenarioSvg = (
 
 const MODULES = [
   {
-    label: 'The Practice',
+    label: 'Trade Review',
     visual: chartSvg,
-    desc: "An interactive session that engages students on their specific errors and blind spots within your subject — then remembers every pattern across sessions, so each practice builds directly on the last.",
+    desc: "A trading coach trained on your strategy reviews the student's real trades — identifies what broke the rules, what held up under pressure, and what pattern keeps repeating. The AI remembers every session, so it builds a case file on each trader over time.",
   },
   {
     label: 'The Mirror',
     visual: mirrorSvg,
-    desc: "Draws on the full arc of a student's conversation history to surface patterns, contradictions, and beliefs they couldn't see from inside the work — a reflection built entirely from their own words.",
+    desc: "A psychology tool that draws on everything a student has said across sessions to surface patterns they couldn't see themselves — contradictions, recurring defenses, beliefs they keep circling. A reflection built entirely from their own words.",
   },
   {
-    label: 'The Scenario',
+    label: 'Live Objection Drill',
     visual: scenarioSvg,
-    desc: "Places students inside a live situation drawn from your curriculum. The AI takes every opposing role — client, examiner, market, counterpart — then debriefs their decisions against your exact framework.",
+    desc: "The AI plays a live prospect and throws real objections — price, timing, trust, competitor. The student has to handle them in real time. After the call, the AI debriefs every moment against your exact sales framework and scoring criteria.",
   },
 ]
 
@@ -290,6 +265,10 @@ export default function DepthSuite() {
             It is a category of structured exercises and practices — built on your content,
             powered by the best available AI — designed to help students actually exercise
             what they learned, not just review it.
+          </p>
+          <p className="ds-examples-note">
+            The modules below are examples of what this looks like across three domains.
+            Yours is built around what you teach.
           </p>
         </div>
 
