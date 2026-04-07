@@ -111,7 +111,7 @@ export default function ClientCalculator() {
       <div className="pricing-calc-row">
         <span className="pricing-calc-label">Monthly margin at {users} users</span>
         <div style={{ textAlign: 'right' }}>
-          <span className={`pricing-calc-value accent${isNeg ? ' negative' : ''}`}>
+          <span className={`pricing-calc-value accent${isNeg ? ' negative' : ' positive'}`}>
             {fmt(monthlyMargin)}/mo
           </span>
           {isNeg && (
@@ -123,7 +123,7 @@ export default function ClientCalculator() {
       {/* Annual */}
       <div className="pricing-calc-row">
         <span className="pricing-calc-label">Annual</span>
-        <span className={`pricing-calc-value accent${isNeg ? ' negative' : ''}`}>
+        <span className={`pricing-calc-value accent${isNeg ? ' negative' : ' positive'}`}>
           {fmt(annual)}/yr
         </span>
       </div>

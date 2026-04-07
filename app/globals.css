@@ -1338,6 +1338,7 @@ body > * { position: relative; z-index: 1; }
 .pricing-calc-select:focus { border-color: rgba(201,168,76,0.4); }
 .pricing-calc-select option { background: var(--bg-elevated); }
 .pricing-calc-value.negative { color: rgba(239,68,68,1) !important; }
+.pricing-calc-value.positive { color: #4ade80 !important; }
 .pricing-calc-neg-note {
   font-size: 11px;
   color: rgba(239,68,68,0.8);
