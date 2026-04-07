@@ -3,8 +3,8 @@
 import { useState } from 'react'
 
 const PLANS = {
-  build:     { label: 'Pro (200 users)',        users: 200, fee: 1520 },
-  production:{ label: 'Enterprise (500 users)', users: 500, fee: 3320 },
+  build:      { label: 'Pro',        defaultUsers: 200, fee: 1520 },
+  production: { label: 'Enterprise', defaultUsers: 500, fee: 3320 },
 } as const
 
 type PlanKey = keyof typeof PLANS
@@ -14,16 +14,23 @@ export default function ClientCalculator() {
   const [charge,   setCharge]   = useState(25)
   const [apiCost,  setApiCost]  = useState(8)
   const [plan,     setPlan]     = useState<PlanKey>('build')
+  const [users,    setUsers]    = useState(200)
 
-  const { users, fee } = PLANS[plan]
+  const fee = PLANS[plan].fee
   const monthlyMargin = (charge - apiCost) * users - fee
   const annual = monthlyMargin * 12
   const isNeg  = monthlyMargin < 0
+
+  function handlePlanChange(newPlan: PlanKey) {
+    setPlan(newPlan)
+    setUsers(PLANS[newPlan].defaultUsers)
+  }
 
   function reset() {
     setCharge(25)
     setApiCost(8)
     setPlan('build')
+    setUsers(200)
     setEditMode(false)
   }
 
@@ -46,7 +53,7 @@ export default function ClientCalculator() {
         </button>
       </div>
 
-      {/* Row 1 */}
+      {/* Row 1 — charge */}
       <div className="pricing-calc-row">
         <span className="pricing-calc-label">What you charge per user</span>
         {editMode ? (
@@ -66,7 +73,7 @@ export default function ClientCalculator() {
         )}
       </div>
 
-      {/* Row 2 */}
+      {/* Row 2 — API cost */}
       <div className="pricing-calc-row">
         <span className="pricing-calc-label">Typical API cost (heavy user)</span>
         {editMode ? (
@@ -86,22 +93,38 @@ export default function ClientCalculator() {
         )}
       </div>
 
-      {/* Row 3 — plan / fee */}
+      {/* Row 3 — plan */}
       <div className={`pricing-calc-row${editMode ? ' pricing-calc-row-select' : ''}`}>
-        <span className="pricing-calc-label">
-          {editMode ? 'Platform plan' : `Platform fee (${PLANS[plan].label})`}
-        </span>
+        <span className="pricing-calc-label">Platform plan</span>
         {editMode ? (
           <select
             className="pricing-calc-select"
             value={plan}
-            onChange={e => setPlan(e.target.value as PlanKey)}
+            onChange={e => handlePlanChange(e.target.value as PlanKey)}
           >
-            <option value="build">Pro (200 users) — $1,520/mo</option>
-            <option value="production">Enterprise (500 users) — $3,320/mo</option>
+            <option value="build">Pro — $1,520/mo</option>
+            <option value="production">Enterprise — $3,320/mo</option>
           </select>
         ) : (
-          <span className="pricing-calc-value">${fee.toLocaleString()}/mo</span>
+          <span className="pricing-calc-value">{PLANS[plan].label} — ${fee.toLocaleString()}/mo</span>
+        )}
+      </div>
+
+      {/* Row 4 — user count */}
+      <div className="pricing-calc-row">
+        <span className="pricing-calc-label">Number of users</span>
+        {editMode ? (
+          <span className="pricing-calc-input-group">
+            <input
+              className="pricing-calc-input"
+              type="number"
+              min={1}
+              value={users}
+              onChange={e => setUsers(Math.max(1, Number(e.target.value)))}
+            />
+          </span>
+        ) : (
+          <span className="pricing-calc-value">{users.toLocaleString()}</span>
         )}
       </div>
 
@@ -109,7 +132,7 @@ export default function ClientCalculator() {
 
       {/* Monthly margin */}
       <div className="pricing-calc-row">
-        <span className="pricing-calc-label">Monthly margin at {users} users</span>
+        <span className="pricing-calc-label">Monthly margin</span>
         <div style={{ textAlign: 'right' }}>
           <span className={`pricing-calc-value accent${isNeg ? ' negative' : ' positive'}`}>
             {fmt(monthlyMargin)}/mo
