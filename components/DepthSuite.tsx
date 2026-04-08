@@ -248,7 +248,6 @@ const BULLETS = [
   "Students engage through structured practice, not passive reading. The AI creates friction, asks hard questions, and refuses to let weak answers slide.",
   "Sessions compound: the AI tracks what each student struggled with and returns to it, making the next session harder and more precise than the last.",
   "Modules are custom-built for your subject matter — the Practice, Mirror, and Scenario are templates, not products. They are rebuilt around what you teach.",
-  "The architecture is drawn from Sophego's Ego Mapper — seven practice modules designed to produce real change through repeated, AI-guided engagement. The same logic applies to any domain.",
   "Students leave with something that transfers to real situations — not just a better score on a quiz.",
 ]
 

@@ -10,7 +10,7 @@ const steps = [
     number: '02',
     title: 'We build your AI',
     description:
-      'We configure the voice, personality, and depth of your AI. Brand colors, custom domain, credit system for your users. One revision round included.',
+      'We configure the voice, personality, and depth of your AI. Brand colors, custom domain, credit system for your users. Up to four revision rounds included.',
     delay: 150,
   },
   {

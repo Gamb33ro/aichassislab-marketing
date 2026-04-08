@@ -41,7 +41,7 @@ export default function Pricing() {
         <div className="pricing-header">
           <span className="text-accent-label">Pricing</span>
           <span className="accent-line" />
-          <h2 className="text-section-headline">Built for serious experts</h2>
+          <h2 className="text-section-headline">One price. Your margin scales. Ours&nbsp;doesn&apos;t.</h2>
           <p className="pricing-header-sub">
             One-time setup. Flat monthly platform fee — fixed regardless of
             how many users you have. You set what you charge your audience and

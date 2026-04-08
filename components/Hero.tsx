@@ -22,7 +22,7 @@ export default function Hero() {
           <p className="hero-sub anim-sub">
             AIChassisLab turns any body of expertise into a specialized AI your
             audience pays to use. Upload your content. Configure your AI. Launch
-            to your students.
+            to your audience.
           </p>
 
           <div className="hero-buttons anim-buttons">
