@@ -343,11 +343,16 @@ body > * { position: relative; z-index: 1; }
   height: 64px;
   background: rgba(12,12,15,0.85);
   backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(255,255,255,0.05);
   z-index: 100;
   display: flex;
   align-items: center;
   padding: 0 clamp(24px, 8vw, 120px);
+  /* Force compositing layer on iOS — prevents backdrop-filter repaint glitch */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
 }
 .nav-inner {
   display: flex;
@@ -1888,11 +1893,44 @@ body > * { position: relative; z-index: 1; }
   border-color: rgba(239,68,68,0.3);
   color: #f87171;
 }
+.sf-iframe-wrap {
+  position: relative;
+}
 .showcase-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: none;
   display: block;
+}
+
+/* Mobile tap-to-interact guard — prevents iframe from stealing page scroll */
+.sf-touch-guard {
+  display: none;
+}
+@media (hover: none) and (pointer: coarse) {
+  .sf-touch-guard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    padding: 0;
+  }
+  .sf-touch-hint {
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: rgba(201,168,76,0.85);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 }
 
 .showcase-cta-text {

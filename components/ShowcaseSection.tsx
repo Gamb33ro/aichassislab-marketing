@@ -31,6 +31,7 @@ type Tab = 'shell' | 'sophego'
 export default function ShowcaseSection() {
   const [active, setActive] = useState<Tab>('shell')
   const [fullscreen, setFullscreen] = useState(false)
+  const [iframeActive, setIframeActive] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => { setMounted(true) }, [])
@@ -41,15 +42,22 @@ export default function ShowcaseSection() {
   const openFullscreen  = useCallback(() => setFullscreen(true), [])
   const closeFullscreen = useCallback(() => setFullscreen(false), [])
 
-  // Lock body scroll and handle Escape when fullscreen
+  // Reset iframe activation when switching tabs
+  const switchTab = useCallback((tab: Tab) => {
+    setActive(tab)
+    setIframeActive(false)
+  }, [])
+
+  // Lock body scroll — always restore to '' so mobile never gets stuck
   useEffect(() => {
     if (!fullscreen) return
-    const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    document.body.style.touchAction = 'none'
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeFullscreen() }
     window.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = prev
+      document.body.style.overflow = ''
+      document.body.style.touchAction = ''
       window.removeEventListener('keydown', onKey)
     }
   }, [fullscreen, closeFullscreen])
@@ -72,14 +80,14 @@ export default function ShowcaseSection() {
         <div className="showcase-tabs">
           <button
             className={`showcase-tab${active === 'shell' ? ' active' : ''}`}
-            onClick={() => setActive('shell')}
+            onClick={() => switchTab('shell')}
           >
             <span className="showcase-tab-label">The Shell — testAI</span>
             <span className="showcase-tab-sub">Your starting point</span>
           </button>
           <button
             className={`showcase-tab${active === 'sophego' ? ' active' : ''}`}
-            onClick={() => setActive('sophego')}
+            onClick={() => switchTab('sophego')}
           >
             <span className="showcase-tab-label">Sophego.AI</span>
             <span className="showcase-tab-sub">A fully built product</span>
@@ -121,12 +129,24 @@ export default function ShowcaseSection() {
               <span>Expand</span>
             </button>
           </div>
-          <iframe
-            key={active}
-            src={iframeSrc}
-            className="showcase-frame"
-            title={CHROME_LABELS[active]}
-          />
+          <div className="sf-iframe-wrap">
+            <iframe
+              key={active}
+              src={iframeSrc}
+              className="showcase-frame"
+              title={CHROME_LABELS[active]}
+            />
+            {/* Mobile tap-to-interact guard — prevents iframe from stealing page scroll */}
+            {!iframeActive && (
+              <button
+                className="sf-touch-guard"
+                onClick={() => setIframeActive(true)}
+                aria-label="Tap to interact with demo"
+              >
+                <span className="sf-touch-hint">Tap to interact</span>
+              </button>
+            )}
+          </div>
         </div>
 
         <p className="showcase-cta-text">
