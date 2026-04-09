@@ -3,6 +3,7 @@ const footerCols = [
     label: 'Product',
     links: [
       { text: 'How it works', href: '#how-it-works' },
+      { text: 'Who we work with', href: '#who-we-work-with' },
       { text: 'Features', href: '#features' },
       { text: 'Pricing', href: '#pricing' },
       { text: 'Who it\'s for', href: '#who' },

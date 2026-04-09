@@ -14,7 +14,7 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     name: 'Content ingestion',
-    tooltip: 'How much of your material — courses, PDFs, transcripts — the AI is trained on.',
+    tooltip: 'How much of your material — documentation, PDFs, transcripts, manuals — the AI is trained on.',
     build: '2 GB',
     production: 'Unlimited',
   },
@@ -56,7 +56,7 @@ const FEATURES: Feature[] = [
   },
   {
     name: 'The Depth Suite',
-    tooltip: 'Structured assessment and progress-tracking modules built specifically for your curriculum. Includes custom module development tailored to your teaching approach.',
+    tooltip: 'Structured assessment and progress-tracking modules built specifically for your knowledge base. Includes custom module development tailored to your methodology.',
     build: false,
     production: true,
   },

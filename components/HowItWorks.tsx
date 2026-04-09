@@ -3,7 +3,7 @@ const steps = [
     number: '01',
     title: 'Upload your content',
     description:
-      'Courses, books, PDFs, video transcripts, research papers. If it\'s text, we can train on it. Your AI learns from your content specifically — not the internet.',
+      'Documentation, PDFs, video transcripts, operations manuals, compliance curricula, research papers. If it\'s text, we can train on it. Your AI learns from your content specifically — not the internet.',
     delay: 0,
   },
   {
@@ -17,7 +17,7 @@ const steps = [
     number: '03',
     title: 'Launch to your audience',
     description:
-      'Your students and clients access your AI on a branded website. Your users access it however you choose to offer it — included in your course, as an add-on, or standalone. Your expertise, running 24/7.',
+      'Deploy to your audience on a branded website under your domain. Offer it as a standalone product, an add-on, or gate it however fits your business. Your expertise, running 24/7.',
     delay: 300,
   },
 ]

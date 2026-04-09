@@ -14,6 +14,7 @@ export default function Nav() {
 
           <div className="nav-links">
             <a href="#how-it-works" className="nav-link">How it works</a>
+            <a href="#who-we-work-with" className="nav-link">Who we work with</a>
             <a href="#features" className="nav-link">Features</a>
             <a href="#pricing" className="nav-link">Pricing</a>
             <a href="#who" className="nav-link">Who it&apos;s for</a>
@@ -42,6 +43,7 @@ export default function Nav() {
 
       <div className={`nav-mobile-menu ${open ? 'open' : 'closed'}`} aria-hidden={!open}>
         <a href="#how-it-works" className="nav-mobile-link" onClick={() => setOpen(false)}>How it works</a>
+        <a href="#who-we-work-with" className="nav-mobile-link" onClick={() => setOpen(false)}>Who we work with</a>
         <a href="#features" className="nav-mobile-link" onClick={() => setOpen(false)}>Features</a>
         <a href="#pricing" className="nav-mobile-link" onClick={() => setOpen(false)}>Pricing</a>
         <a href="#who" className="nav-mobile-link" onClick={() => setOpen(false)}>Who it&apos;s for</a>

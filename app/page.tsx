@@ -2,6 +2,7 @@ import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import Problem from '@/components/Problem'
 import HowItWorks from '@/components/HowItWorks'
+import WhoWeWorkWith from '@/components/WhoWeWorkWith'
 import PricingRecommendation from '@/components/PricingRecommendation'
 import Pricing from '@/components/Pricing'
 import FeaturesTable from '@/components/FeaturesTable'
@@ -20,6 +21,7 @@ export default function Home() {
         <Hero />
         <Problem />
         <HowItWorks />
+        <WhoWeWorkWith />
         <PricingRecommendation />
         <Pricing />
         <FeaturesTable />

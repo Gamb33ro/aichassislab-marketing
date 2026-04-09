@@ -724,6 +724,76 @@ body > * { position: relative; z-index: 1; }
   .how-section { padding: 64px 24px; }
 }
 
+/* ── Who We Work With ────────────────────────────────────────── */
+.markets-section {
+  background: var(--bg-base);
+  padding: var(--space-section) clamp(24px, 8vw, 120px);
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+.markets-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.markets-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.markets-header-sub {
+  margin: 20px auto 0;
+  max-width: 540px;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.markets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+.market-card {
+  padding: 40px 36px;
+  background: rgba(255,255,255,0.018);
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  transition: background 0.2s;
+}
+.market-card:hover {
+  background: rgba(255,255,255,0.03);
+}
+.market-card-number {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: rgba(201,168,76,0.14);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.market-card-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+.market-card-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .markets-grid { grid-template-columns: 1fr; }
+  .market-card { padding: 32px 24px; }
+  .markets-section { padding: 64px 24px; }
+}
+
 /* ─── Pricing ─── */
 .pricing-section {
   background: var(--bg-surface);
