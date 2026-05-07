@@ -34,7 +34,7 @@ export default function Footer() {
         <div className="footer-top">
           <div>
             <a href="/" className="footer-brand-name">AIChassisLab</a>
-            <p className="footer-brand-sub">Built by Rafael Gambero</p>
+            <p className="footer-brand-sub">Built by Marcio Gambero</p>
           </div>
 
           <nav className="footer-links-grid" aria-label="Footer navigation">
