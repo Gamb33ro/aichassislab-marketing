@@ -3,23 +3,26 @@
 import { useState } from 'react'
 
 const PLANS = {
-  build:      { label: 'Pro',        defaultUsers: 200, fee: 1520 },
-  production: { label: 'Enterprise', defaultUsers: 500, fee: 3320 },
+  standard:   { label: 'Standard Core',   defaultUsers: 100, fee: 350 },
+  enterprise: { label: 'Enterprise Lite', defaultUsers: 100, fee: 500 },
 } as const
 
 type PlanKey = keyof typeof PLANS
 
+const API_COST_PER_USER = 10
+
 export default function ClientCalculator() {
   const [editMode, setEditMode] = useState(false)
-  const [charge,   setCharge]   = useState(25)
-  const [apiCost,  setApiCost]  = useState(8)
-  const [plan,     setPlan]     = useState<PlanKey>('build')
-  const [users,    setUsers]    = useState(200)
+  const [charge,   setCharge]   = useState(50)
+  const [plan,     setPlan]     = useState<PlanKey>('standard')
+  const [users,    setUsers]    = useState(100)
 
-  const fee = PLANS[plan].fee
-  const monthlyMargin = (charge - apiCost) * users - fee
-  const annual = monthlyMargin * 12
-  const isNeg  = monthlyMargin < 0
+  const fee          = PLANS[plan].fee
+  const grossRevenue = charge * users
+  const apiOverhead  = API_COST_PER_USER * users
+  const monthlyMargin = grossRevenue - fee - apiOverhead
+  const annual        = monthlyMargin * 12
+  const isNeg         = monthlyMargin < 0
 
   function handlePlanChange(newPlan: PlanKey) {
     setPlan(newPlan)
@@ -27,10 +30,9 @@ export default function ClientCalculator() {
   }
 
   function reset() {
-    setCharge(25)
-    setApiCost(8)
-    setPlan('build')
-    setUsers(200)
+    setCharge(50)
+    setPlan('standard')
+    setUsers(100)
     setEditMode(false)
   }
 
@@ -73,46 +75,9 @@ export default function ClientCalculator() {
         )}
       </div>
 
-      {/* Row 2 — API cost */}
+      {/* Row 2 — user count */}
       <div className="pricing-calc-row">
-        <span className="pricing-calc-label">Typical API cost (heavy user)</span>
-        {editMode ? (
-          <span className="pricing-calc-input-group">
-            <span className="pricing-calc-prefix">~$</span>
-            <input
-              className="pricing-calc-input"
-              type="number"
-              min={0}
-              value={apiCost}
-              onChange={e => setApiCost(Math.max(0, Number(e.target.value)))}
-            />
-            <span className="pricing-calc-suffix">/mo</span>
-          </span>
-        ) : (
-          <span className="pricing-calc-value">~${apiCost}/mo</span>
-        )}
-      </div>
-
-      {/* Row 3 — plan */}
-      <div className={`pricing-calc-row${editMode ? ' pricing-calc-row-select' : ''}`}>
-        <span className="pricing-calc-label">Platform plan</span>
-        {editMode ? (
-          <select
-            className="pricing-calc-select"
-            value={plan}
-            onChange={e => handlePlanChange(e.target.value as PlanKey)}
-          >
-            <option value="build">Pro — $1,520/mo</option>
-            <option value="production">Enterprise — $3,320/mo</option>
-          </select>
-        ) : (
-          <span className="pricing-calc-value">{PLANS[plan].label} — ${fee.toLocaleString()}/mo</span>
-        )}
-      </div>
-
-      {/* Row 4 — user count */}
-      <div className="pricing-calc-row">
-        <span className="pricing-calc-label">Number of users</span>
+        <span className="pricing-calc-label">Number of active users</span>
         {editMode ? (
           <span className="pricing-calc-input-group">
             <input
@@ -128,11 +93,50 @@ export default function ClientCalculator() {
         )}
       </div>
 
+      {/* Row 3 — plan */}
+      <div className={`pricing-calc-row${editMode ? ' pricing-calc-row-select' : ''}`}>
+        <span className="pricing-calc-label">AIChassisLab plan</span>
+        {editMode ? (
+          <select
+            className="pricing-calc-select"
+            value={plan}
+            onChange={e => handlePlanChange(e.target.value as PlanKey)}
+          >
+            <option value="standard">Standard Core — $350/mo</option>
+            <option value="enterprise">Enterprise Lite — $500/mo</option>
+          </select>
+        ) : (
+          <span className="pricing-calc-value">{PLANS[plan].label} — ${fee.toLocaleString()}/mo</span>
+        )}
+      </div>
+
+      <div style={{ height: 1, background: 'rgba(201,168,76,0.2)', margin: '8px 0 4px' }} />
+
+      {/* Gross revenue */}
+      <div className="pricing-calc-row">
+        <span className="pricing-calc-label">Gross revenue collected</span>
+        <span className="pricing-calc-value">${grossRevenue.toLocaleString()}/mo</span>
+      </div>
+
+      {/* Platform cost */}
+      <div className="pricing-calc-row">
+        <span className="pricing-calc-label">Your fixed platform cost</span>
+        <span className="pricing-calc-value">−${fee.toLocaleString()}/mo</span>
+      </div>
+
+      {/* API overhead */}
+      <div className="pricing-calc-row">
+        <span className="pricing-calc-label">
+          API overhead (direct to provider) *
+        </span>
+        <span className="pricing-calc-value">~−${apiOverhead.toLocaleString()}/mo</span>
+      </div>
+
       <div style={{ height: 1, background: 'rgba(201,168,76,0.2)', margin: '8px 0 4px' }} />
 
       {/* Monthly margin */}
       <div className="pricing-calc-row">
-        <span className="pricing-calc-label">Monthly margin</span>
+        <span className="pricing-calc-label">Net monthly margin</span>
         <div style={{ textAlign: 'right' }}>
           <span className={`pricing-calc-value accent${isNeg ? ' negative' : ' positive'}`}>
             {fmt(monthlyMargin)}/mo
@@ -152,8 +156,9 @@ export default function ClientCalculator() {
       </div>
 
       <p className="pricing-rec-footnote">
-        * Based on observed usage patterns from active daily users.
-        Light users will cost significantly less.
+        * Paid directly to OpenAI / Anthropic via your secure key based on raw
+        usage. Estimated at ~$10/user/mo for a heavy daily user — light users
+        cost significantly less.
       </p>
     </div>
   )

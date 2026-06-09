@@ -1,34 +1,30 @@
 const TIERS = [
   {
-    name: 'Pro',
-    setup: '$5,500',
-    monthly: '$1,520',
-    annual: '$15,200',
+    name: 'Standard Core',
+    monthly: '$350',
     featured: true,
     features: [
-      'Full branding and deployed website',
-      'Up to 2GB content',
-      'Custom domain',
-      'Memory — AI remembers each user',
-      'Analytics dashboard',
-      'Voice tuning session',
-      'Four revision rounds',
-      'Priority support',
+      'Fully custom-branded interface (your logo, name, colors)',
+      'Custom domain configuration',
+      '100% Secure BYOK — zero infrastructure markup',
+      'Up to 2GB document & video transcript content ingestion',
+      'Independent session memory per user',
+      'Core usage analytics dashboard',
+      'Standard Email Support',
     ],
   },
   {
-    name: 'Enterprise',
-    setup: '$7,500',
-    monthly: '$3,320',
-    annual: '$33,200',
+    name: 'Enterprise Lite',
+    monthly: '$500',
     featured: false,
     features: [
-      'Everything in Pro',
-      'Unlimited content',
-      'Full white-label — no AIChassisLab branding',
+      'Everything in Standard Core',
+      'Multi-Instance Deployment',
+      'Unlimited content database ingestion',
+      'Full White-Label — zero "Powered by AIChassisLab" branding',
       'The Depth Suite — structured assessment modules',
-      'Unlimited revisions',
-      'Launch support',
+      'Advanced behavioral analytics',
+      'Priority Slack Support',
     ],
   },
 ]
@@ -41,12 +37,12 @@ export default function Pricing() {
         <div className="pricing-header">
           <span className="text-accent-label">Pricing</span>
           <span className="accent-line" />
-          <h2 className="text-section-headline">One price. Your margin scales. Ours&nbsp;doesn&apos;t.</h2>
+          <h2 className="text-section-headline">Flat monthly license. Your margin scales. Ours&nbsp;doesn&apos;t.</h2>
           <p className="pricing-header-sub">
-            One-time setup. Flat monthly platform fee — fixed regardless of
-            how many users you have. You set what you charge your audience and
-            keep 100% of it. We charge a flat license, not a percentage of your
-            revenue. Your margin scales with your user base. Ours does not.
+            Zero setup fee. A flat monthly platform license — fixed regardless of
+            how many users you have. You bring your own API key and pay the
+            provider directly at raw cost. You set what you charge your audience
+            and keep 100% of it.
           </p>
         </div>
 
@@ -79,8 +75,8 @@ function PricingCardContent({ tier }: { tier: typeof TIERS[number] }) {
   return (
     <>
       <div className="pricing-tier-name">{tier.name}</div>
-      <div className="pricing-setup">{tier.setup}</div>
-      <div className="pricing-setup-label">one-time setup</div>
+      <div className="pricing-setup">$0</div>
+      <div className="pricing-setup-label">zero setup fee</div>
 
       <div className="pricing-divider" />
 
@@ -89,7 +85,7 @@ function PricingCardContent({ tier }: { tier: typeof TIERS[number] }) {
         <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--text-muted)' }}>/mo</span>
       </div>
       <div className="pricing-monthly-note">
-        or {tier.annual} /year
+        flat monthly license
       </div>
 
       <ul className="pricing-features" role="list">

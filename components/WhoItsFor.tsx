@@ -1,6 +1,6 @@
 const revenueStat = (
   <div className="who-path-stat">
-    <span className="who-stat-num">90</span>
+    <span className="who-stat-num">10–15</span>
     <span className="who-stat-label">users to<br />break even</span>
   </div>
 )
@@ -13,7 +13,7 @@ const costStat = (
     </div>
     <span className="who-stat-vs">vs</span>
     <div className="who-stat-compare-item">
-      <span className="who-stat-compare-num who-stat-compare-num--accent">$1,520</span>
+      <span className="who-stat-compare-num who-stat-compare-num--accent">$350</span>
       <span className="who-stat-compare-label">platform / month</span>
     </div>
   </div>
@@ -22,10 +22,10 @@ const costStat = (
 const PATHS = [
   {
     tag: 'Revenue Generation Play',
-    headline: '90 users covers\nthe platform fee.',
+    headline: '10 to 15 users covers\nthe platform fee.',
     stat: revenueStat,
-    body: "You are not asking for a large user base — you are asking for a small slice of the audience you already have. A creator with 500 students needs 18% adoption at $25/month to break even. A creator with 1,000 students needs 9%. Gate your AI behind a premium tier, sell it as a paid add-on, or bundle it into a higher membership level. Every subscriber above 90 is pure margin, running without you touching it.",
-    proof: <>90 users at $25/month covers the platform fee entirely — after API costs. At 200 subscribers, that&apos;s over $22,000 net annually. Everything above 90 is ~$17 per user, per month, straight to you. Model your numbers with the <a href="#calculator" className="who-proof-link">calculator</a>.</>,
+    body: "You are not asking for a massive user base — you are leveraging a small slice of the audience you already have. If you run an academy with 100 students, getting just 10 of them to opt into a premium AI-tutor tier covers your entire subscription. Every single user after that is pure margin flowing straight into your business with zero operational overhead.",
+    proof: <>Just 10 to 15 users covers the platform fee entirely. At 100 subscribers charging $35/month, that&apos;s ~$2,150 net monthly profit after your subscription and all API costs. Model your exact numbers with the <a href="#calculator" className="who-proof-link">calculator</a>.</>,
     works: ['Premium tier upgrades', 'Paid add-ons to existing courses', 'Post-course subscriptions', 'Membership tier expansions'],
     delay: 0,
   },
