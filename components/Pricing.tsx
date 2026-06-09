@@ -40,9 +40,15 @@ export default function Pricing() {
           <h2 className="text-section-headline">Flat monthly license. Your margin scales. Ours&nbsp;doesn&apos;t.</h2>
           <p className="pricing-header-sub">
             Zero setup fee. A flat monthly platform license — fixed regardless of
-            how many users you have. You bring your own API key and pay the
-            provider directly at raw cost. You set what you charge your audience
-            and keep 100% of it.
+            how many users you have. You set what you charge your audience and
+            keep 100% of it.
+          </p>
+          <p className="pricing-header-sub" style={{ marginTop: 12 }}>
+            <strong style={{ color: 'var(--text-primary)' }}>BYOK — Bring Your Own Key.</strong>{' '}
+            You connect your own OpenAI or Anthropic API account directly to
+            your platform. Your users&apos; data never passes through our
+            servers, and you pay the AI provider at raw cost with zero markup
+            from us.
           </p>
         </div>
 

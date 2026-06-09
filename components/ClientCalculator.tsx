@@ -12,17 +12,28 @@ type PlanKey = keyof typeof PLANS
 const API_COST_PER_USER = 10
 
 export default function ClientCalculator() {
-  const [editMode, setEditMode] = useState(false)
-  const [charge,   setCharge]   = useState(50)
-  const [plan,     setPlan]     = useState<PlanKey>('standard')
-  const [users,    setUsers]    = useState(100)
+  const [editMode,     setEditMode]     = useState(false)
+  const [charge,       setCharge]       = useState(50)
+  const [plan,         setPlan]         = useState<PlanKey>('standard')
+  const [users,        setUsers]        = useState(100)
+  const [showBreakeven, setShowBreakeven] = useState(false)
 
-  const fee          = PLANS[plan].fee
-  const grossRevenue = charge * users
-  const apiOverhead  = API_COST_PER_USER * users
+  const fee           = PLANS[plan].fee
+  const grossRevenue  = charge * users
+  const apiOverhead   = API_COST_PER_USER * users
   const monthlyMargin = grossRevenue - fee - apiOverhead
   const annual        = monthlyMargin * 12
   const isNeg         = monthlyMargin < 0
+
+  // Break-even calculations
+  // profit = (charge - API_COST_PER_USER) * users - fee = 0
+  const canBreakByUsers  = charge > API_COST_PER_USER
+  const minUsers         = canBreakByUsers
+    ? Math.ceil(fee / (charge - API_COST_PER_USER))
+    : null
+  // min charge (exact): fee/users + API_COST_PER_USER — round up to nearest cent
+  const minChargeExact   = fee / users + API_COST_PER_USER
+  const minCharge        = Math.ceil(minChargeExact * 100) / 100
 
   function handlePlanChange(newPlan: PlanKey) {
     setPlan(newPlan)
@@ -34,6 +45,7 @@ export default function ClientCalculator() {
     setPlan('standard')
     setUsers(100)
     setEditMode(false)
+    setShowBreakeven(false)
   }
 
   function fmt(n: number) {
@@ -57,7 +69,14 @@ export default function ClientCalculator() {
 
       {/* Row 1 — charge */}
       <div className="pricing-calc-row">
-        <span className="pricing-calc-label">What you charge per user</span>
+        <span className="pricing-calc-label">
+          What you charge per user
+          {editMode && charge <= API_COST_PER_USER && (
+            <span style={{ display: 'block', fontSize: 11, color: 'var(--accent)', marginTop: 2 }}>
+              Tip: charge over $10/mo to cover the API overhead per user
+            </span>
+          )}
+        </span>
         {editMode ? (
           <span className="pricing-calc-input-group">
             <span className="pricing-calc-prefix">$</span>
@@ -126,9 +145,7 @@ export default function ClientCalculator() {
 
       {/* API overhead */}
       <div className="pricing-calc-row">
-        <span className="pricing-calc-label">
-          API overhead (direct to provider) *
-        </span>
+        <span className="pricing-calc-label">API overhead (direct to provider) *</span>
         <span className="pricing-calc-value">~−${apiOverhead.toLocaleString()}/mo</span>
       </div>
 
@@ -154,6 +171,37 @@ export default function ClientCalculator() {
           {fmt(annual)}/yr
         </span>
       </div>
+
+      {/* Break-even toggle */}
+      <button
+        className="pricing-calc-breakeven-btn"
+        onClick={() => setShowBreakeven(v => !v)}
+        type="button"
+      >
+        {showBreakeven ? '▲ Hide' : '▼ See minimum usage and price to break a profit'}
+      </button>
+
+      {showBreakeven && (
+        <div className="pricing-calc-breakeven-panel">
+          <div className="pricing-calc-breakeven-row">
+            <span className="pricing-calc-label">Min users at ${charge}/user</span>
+            <span className="pricing-calc-value">
+              {canBreakByUsers
+                ? `${minUsers!.toLocaleString()} users`
+                : 'Impossible — charge must exceed $10/user'}
+            </span>
+          </div>
+          <div className="pricing-calc-breakeven-row">
+            <span className="pricing-calc-label">Min price with {users.toLocaleString()} users</span>
+            <span className="pricing-calc-value">${minCharge.toFixed(2)}/user/mo</span>
+          </div>
+          <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: '6px 0 0', lineHeight: 1.5 }}>
+            Any combination above these thresholds generates profit. API costs
+            are ~$10/user/mo — your price per user must exceed this to have
+            margin left after covering the platform fee.
+          </p>
+        </div>
+      )}
 
       <p className="pricing-rec-footnote">
         * Paid directly to OpenAI / Anthropic via your secure key based on raw
