@@ -1,30 +1,9 @@
-const footerCols = [
-  {
-    label: 'Product',
-    links: [
-      { text: 'How it works', href: '#how-it-works' },
-      { text: 'Who we work with', href: '#who-we-work-with' },
-      { text: 'Features', href: '#features' },
-      { text: 'Pricing', href: '#pricing' },
-      { text: 'Who it\'s for', href: '#who' },
-    ],
-  },
-  {
-    label: 'Company',
-    links: [
-      { text: 'About', href: '#contact' },
-      { text: 'Contact', href: '#contact' },
-      { text: 'Get a demo', href: '#contact' },
-    ],
-  },
-  {
-    label: 'Legal',
-    links: [
-      { text: 'Privacy Policy', href: '#contact' },
-      { text: 'Terms of Service', href: '#contact' },
-      { text: 'Acceptable Use', href: '#contact' },
-    ],
-  },
+const footerLinks = [
+  { text: 'How it works',    href: '#how-it-works' },
+  { text: 'Who we work with', href: '#who-we-work-with' },
+  { text: 'Features',        href: '#features' },
+  { text: 'Pricing',         href: '#pricing' },
+  { text: 'Contact',         href: '#contact' },
 ]
 
 export default function Footer() {
@@ -37,16 +16,11 @@ export default function Footer() {
             <p className="footer-brand-sub">Built by Marcio Gambero</p>
           </div>
 
-          <nav className="footer-links-grid" aria-label="Footer navigation">
-            {footerCols.map(col => (
-              <div key={col.label} className="footer-links-col">
-                <span className="footer-link-label">{col.label}</span>
-                {col.links.map(link => (
-                  <a key={link.text} href={link.href} className="footer-link">
-                    {link.text}
-                  </a>
-                ))}
-              </div>
+          <nav className="footer-links-col" aria-label="Footer navigation">
+            {footerLinks.map(link => (
+              <a key={link.text} href={link.href} className="footer-link">
+                {link.text}
+              </a>
             ))}
           </nav>
         </div>

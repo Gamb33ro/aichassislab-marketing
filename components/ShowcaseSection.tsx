@@ -37,7 +37,7 @@ export default function ShowcaseSection() {
   useEffect(() => { setMounted(true) }, [])
 
   const features  = active === 'shell' ? SHELL_FEATURES : SOPHEGO_FEATURES
-  const iframeSrc = active === 'shell' ? '/demo/shell'  : '/demo/sophego'
+  const iframeSrc = active === 'shell' ? '/demo/shell/'  : '/demo/sophego/'
 
   const openFullscreen  = useCallback(() => setFullscreen(true), [])
   const closeFullscreen = useCallback(() => setFullscreen(false), [])
